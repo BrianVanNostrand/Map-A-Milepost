@@ -1,0 +1,132 @@
+﻿<UserControl x:Class="Map_A_Milepost.Views.MapLineView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewmodels="clr-namespace:Map_A_Milepost.ViewModels" 
+             mc:Ignorable="d" 
+             d:DesignHeight="375" d:DesignWidth="364">
+    <UserControl.Resources>
+        <viewmodels:MapLineViewModel x:Key="MapLineVM"/>
+    </UserControl.Resources>
+    <Grid DataContext="{StaticResource MapLineVM}"  Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80px"/>
+            <RowDefinition/>
+            <RowDefinition Height="30px"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="125px"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="40px"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="1">Start Point</Label>
+            <Label Grid.Row="0" Grid.Column="2">End Point</Label>
+            <Label x:Name="MapPointSearchDistanceLabel" Grid.Row="1" Grid.Column="0">Search Distance</Label>
+            <Label  Grid.Row="1" Grid.Column="3">Feet</Label>
+            <TextBox x:Name="MapStartPointSearcDistanceTextBox"  Grid.Row="1" Grid.Column="1" Text="{Binding SOEStartArgs.SearchRadius, Mode=TwoWay}">
+            </TextBox>
+            <TextBox x:Name="MapEndPointSearcDistanceTextBox"  Grid.Row="1" Grid.Column="2" Text="{Binding SOEEndArgs.SearchRadius, Mode=TwoWay}"></TextBox>
+            <Label Grid.Row="2" Grid.Column="0">Coordinates of Click</Label>
+            <Label Grid.Row="2" Grid.Column="1">
+                <MultiBinding StringFormat="{}{0} , {1}">
+                    <Binding Path="SOEStartArgs.X" />
+                    <Binding Path="SOEStartArgs.Y" />
+                </MultiBinding>
+            </Label>
+            <Label Grid.Row="2" Grid.Column="2">
+                <MultiBinding StringFormat="{}{0} , {1}">
+                    <Binding Path="SOEEndArgs.X" />
+                    <Binding Path="SOEEndArgs.Y" />
+                </MultiBinding>
+            </Label>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition>
+                </RowDefinition>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <!--Labels-->
+            <Label Grid.Column="0" Grid.Row="0" Background="#cfd8ff" >Results</Label>
+            <Label Background="#cfd8ff" Grid.Column="1" Grid.Row="0">Start</Label>
+            <Label Background="#cfd8ff" Grid.Column="2" Grid.Row="0">End</Label>
+            <Label Grid.Column="0" Grid.Row="1">Angle</Label>
+            <Label Grid.Column="0" Grid.Row="2">ARM</Label>
+            <Label Grid.Column="0" Grid.Row="3">Back</Label>
+            <Label Grid.Column="0" Grid.Row="4">Decrease</Label>
+            <Label Grid.Column="0" Grid.Row="5">Distance</Label>
+            <Label Grid.Column="0" Grid.Row="6">Route</Label>
+            <Label Grid.Column="0" Grid.Row="7">SRMP</Label>
+            <Label Grid.Column="0" Grid.Row="8">X</Label>
+            <Label Grid.Column="0" Grid.Row="9">Y</Label>
+            <!--Start Point Bindings-->
+            <Label Grid.Column="1" Grid.Row="1" Content="{Binding SOEStartResponse.Angle,UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Column="1" Grid.Row="2" Content="{Binding SOEStartResponse.Arm, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Column="1" Grid.Row="3" Content="{Binding SOEStartResponse.Back, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Column="1" Grid.Row="4" Content="{Binding SOEStartResponse.Decrease, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Column="1" Grid.Row="5" Content="{Binding SOEStartResponse.Distance, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Column="1" Grid.Row="6" Content="{Binding SOEStartResponse.Route, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Column="1" Grid.Row="7" Content="{Binding SOEStartResponse.Srmp, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Column="1" Grid.Row="8" Content="{Binding SOEStartResponse.RouteGeometry.x, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Column="1" Grid.Row="9" Content="{Binding SOEStartResponse.RouteGeometry.y, UpdateSourceTrigger=PropertyChanged}"/>
+            <!--End Point Bindings-->
+            <Label Grid.Column="2" Grid.Row="1" Content="{Binding SOEEndResponse.Angle,UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Column="2" Grid.Row="2" Content="{Binding SOEEndResponse.Arm, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Column="2" Grid.Row="3" Content="{Binding SOEEndResponse.Back, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Column="2" Grid.Row="4" Content="{Binding SOEEndResponse.Decrease, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Column="2" Grid.Row="5" Content="{Binding SOEEndResponse.Distance, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Column="2" Grid.Row="6" Content="{Binding SOEEndResponse.Route, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Column="2" Grid.Row="7" Content="{Binding SOEEndResponse.Srmp, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Column="2" Grid.Row="8" Content="{Binding SOEEndResponse.RouteGeometry.x, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Column="2" Grid.Row="9" Content="{Binding SOEEndResponse.RouteGeometry.y, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Border Grid.ColumnSpan="3" Grid.Row="2" BorderBrush="#b3c1fc" BorderThickness="0,.5,0,0" Background="{x:Null}" />
+            <Border Grid.ColumnSpan="3" Grid.Row="3" BorderBrush="#b3c1fc" BorderThickness="0,.5,0,0" Background="{x:Null}" />
+            <Border Grid.ColumnSpan="3" Grid.Row="4" BorderBrush="#b3c1fc" BorderThickness="0,.5,0,0" Background="{x:Null}" />
+            <Border Grid.ColumnSpan="3" Grid.Row="5" BorderBrush="#b3c1fc" BorderThickness="0,.5,0,0" Background="{x:Null}" />
+            <Border Grid.ColumnSpan="3" Grid.Row="6" BorderBrush="#b3c1fc" BorderThickness="0,.5,0,0" Background="{x:Null}" />
+            <Border Grid.ColumnSpan="3" Grid.Row="7" BorderBrush="#b3c1fc" BorderThickness="0,.5,0,0" Background="{x:Null}" />
+            <Border Grid.ColumnSpan="3" Grid.Row="8" BorderBrush="#b3c1fc" BorderThickness="0,.5,0,0" Background="{x:Null}" />
+            <Border Grid.ColumnSpan="3" Grid.Row="9" BorderBrush="#b3c1fc" BorderThickness="0,.5,0,0" Background="{x:Null}" />
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.Resources>
+                <ResourceDictionary Source="../Themes/ButtonTheme.xaml" />
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="MapStartPointExecuteButton" Grid.Row="3" Grid.Column="0" Command="{Binding UpdateSOEStartEndResponseCommand}" CommandParameter="start" ToolTip="Start a session to map the start point." Style="{StaticResource whiteButton}">Map Start</Button>
+            <Button x:Name="MapEndPointExecuteButton" Grid.Row="3" Grid.Column="1" Command="{Binding UpdateSOEStartEndResponseCommand}" CommandParameter="end" ToolTip="Start a session to map the end point." Style="{StaticResource whiteButton}">Map End</Button>
+            <Button x:Name="ClearReultsButton" Grid.Row="3" Grid.Column="2" Command="{Binding UpdateSOEStartEndResponse}" CommandParameter="end" ToolTip="Clear the selection in this tab." Style="{StaticResource whiteButton}">Clear</Button>
+            <Button x:Name="SaveResultsButton" Grid.Row="3" Grid.Column="3" Command="{Binding SaveLineResultCommand}" CommandParameter="end" Style="{StaticResource whiteButton}">Save Results</Button>
+        </Grid>
+    </Grid>
+</UserControl>

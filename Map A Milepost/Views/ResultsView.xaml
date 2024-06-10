@@ -1,0 +1,162 @@
+﻿<UserControl x:Class="Map_A_Milepost.Views.ResultsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" Height="375" Width="364"
+             xmlns:b ="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:viewmodels="clr-namespace:Map_A_Milepost.ViewModels" 
+             xmlns:rd ="../Themes/ButtonTheme.xaml">
+               
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <viewmodels:ResultsViewModel x:Key="ResultsVM"/>
+            <viewmodels:MapPointViewModel x:Key="MapPointVM"/>
+            <viewmodels:MapLineViewModel x:Key="MapLineVM"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Themes/ButtonTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+        <Grid Background="White" DataContext="{StaticResource ResultsVM}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition  Height="40px"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0">
+            <Grid.InputBindings>
+                <MouseBinding MouseAction="LeftClick" Command="{Binding selectDataGrid}"/>
+            </Grid.InputBindings>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30px"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0">Points:</Label>
+                <Label DataContext="{StaticResource MapPointVM}" Grid.Row="0" Grid.Column="1" Content="{Binding SoePointResponses.Count}"></Label>
+            </Grid>
+            <DataGrid DataContext="{StaticResource MapPointVM}" CanUserAddRows="False" Grid.ColumnSpan="3" Grid.Row="1" x:Name="PointsGrid" HorizontalAlignment="Stretch" AutoGenerateColumns="False" VerticalAlignment="Stretch" ItemsSource="{Binding Path=SoePointResponses}">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="LightBlue" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource whiteButton}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Route" Binding="{Binding Route}"/>
+                    <DataGridTextColumn Header="ARM" Binding="{Binding Arm}"/>
+                    <DataGridTextColumn Header="SRMP" Binding="{Binding Srmp}"/>
+                    <DataGridTextColumn Header="Decrease" Binding="{Binding Decrease}"/>
+                    <DataGridTextColumn Header="Back" Binding="{Binding Back}"/>
+                    <DataGridTextColumn Header="X" Binding="{Binding RouteGeometry.x}"/>
+                    <DataGridTextColumn Header="Y" Binding="{Binding RouteGeometry.y}"/>
+                </DataGrid.Columns>
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="SelectionChanged">
+                        <b:InvokeCommandAction CommandParameter="{Binding ElementName=PointsGrid, Path=SelectedItems}" Command="{Binding SelectedItemsCommand }" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </DataGrid>
+        </Grid>
+        <Grid  Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30px"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0">Lines:</Label>
+                <Label Grid.Row="0" Grid.Column="1" DataContext="{StaticResource MapLineVM}" Content="{Binding SoeLineResponses.Count}"></Label>
+            </Grid>
+            <DataGrid CanUserAddRows="False" Grid.ColumnSpan="3" Grid.Row="1" x:Name="LinesGrid" HorizontalAlignment="Stretch" AutoGenerateColumns="False" VerticalAlignment="Stretch" DataContext="{StaticResource MapLineVM}" ItemsSource="{Binding Path=SoeLineResponses}">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver"
+                           Value="True">
+                                <Setter Property="Background"
+                               Value="LightBlue" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <!--Start Info-->
+                    <DataGridTemplateColumn Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                               <!-- <Button Content="Delete" Command="Delete"/> -->
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Route" Binding="{Binding [0].Route}"/>
+                    <DataGridTextColumn Header="ARM" Binding="{Binding [0].Arm}"/>
+                    <DataGridTextColumn Header="EndARM" Binding="{Binding [1].Arm}"/>
+                    <DataGridTextColumn Header="SRMP" Binding="{Binding [0].Srmp}"/>
+                    <DataGridTextColumn Header="EndSRMP" Binding="{Binding [1].Srmp}"/>
+                    <DataGridTextColumn Header="Decrease" Binding="{Binding [0].Decrease}"/>
+                    <DataGridTextColumn Header="Back" Binding="{Binding [0].Back}"/>
+                    <DataGridTextColumn Header="EndBack" Binding="{Binding [1].Back}"/>
+                    <DataGridTextColumn Header="X" Binding="{Binding [0].RouteGeometry.x}"/>
+                    <DataGridTextColumn Header="Y" Binding="{Binding [0].RouteGeometry.y}"/>
+                    <DataGridTextColumn Header="EndX" Binding="{Binding [1].RouteGeometry.x}"/>
+                    <DataGridTextColumn Header="EndY" Binding="{Binding [1].RouteGeometry.y}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource whiteButton}">
+                Export Data
+            </Button>
+            <Button Grid.Row="2" Grid.Column="1" Command="{Binding DeleteItemsCommand}" Style="{StaticResource whiteButton}">
+                Delete Record
+            </Button>
+            <Button Grid.Row="2" Grid.Column="2"  Command="{Binding ClearItemsCommand}" Style="{StaticResource whiteButton}">
+                Clear
+            </Button>
+        </Grid>
+        
+    </Grid>
+</UserControl>

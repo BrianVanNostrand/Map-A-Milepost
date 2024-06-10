@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="Map_A_Milepost.MilepostDockpaneView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
+             xmlns:ui="clr-namespace:Map_A_Milepost"
+             xmlns:viewmodels="clr-namespace:Map_A_Milepost.ViewModels" 
+             xmlns:views="clr-namespace:Map_A_Milepost.Views"
+             xmlns:extensions="clr-namespace:ArcGIS.Desktop.Extensions;assembly=ArcGIS.Desktop.Extensions" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <extensions:DesignOnlyResourceDictionary Source="pack://application:,,,/ArcGIS.Desktop.Framework;component\Themes\Default.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <viewmodels:MainViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.DataContext>
+            <viewmodels:MainViewModel x:Name="MainViewModel"/>
+        </Grid.DataContext>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" LastChildFill="true" KeyboardNavigation.TabNavigation="Local" Height="50">
+            <TabControl Height="50" x:Name="controlsGrid">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectPageCommand}" CommandParameter="{Binding ElementName=controlsGrid}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <TabItem x:Name="MapPointButton" Height="50" Width="80" Header="Map a Point">
+                    <!--<i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding Path=SelectPageCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>-->
+                </TabItem>
+                <TabItem x:Name="MapLineButton" Height="50" Width="80" Header="Map a Line">
+                    <!--<i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding Path=SelectPageCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>-->
+                </TabItem>
+                <TabItem x:Name="ResultsButton" Height="50" Width="80" Header="Results">
+                    <!--<i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding Path=SelectPageCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>-->
+                </TabItem>
+            </TabControl>
+        </DockPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Row="1">
+            <ContentControl ClipToBounds="True" Margin="0,10,0,0" VerticalAlignment="Top" Content="{Binding SelectedViewModel}">
+                <ContentControl.Resources>
+                    <views:MapLineView x:Key="MapLineViewKey"/>
+                    <views:MapPointView x:Key="MapPointViewKey"/>
+                    <views:ResultsView x:Key="ResultsViewKey"/>
+                    <DataTemplate DataType="{x:Type viewmodels:MapPointViewModel}">
+                        <ContentControl Content="{StaticResource MapPointViewKey}"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:MapLineViewModel}">
+                        <ContentControl Content="{StaticResource MapLineViewKey}"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:ResultsViewModel}">
+                        <ContentControl Content="{StaticResource ResultsViewKey}"/>
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </ScrollViewer>
+    </Grid>
+    </UserControl>
