@@ -24,6 +24,7 @@
         <group id="Map_A_Milepost_Group1" caption="MilepostTools" appearsOnAddInTab="true">
           <!-- host controls within groups -->
           <button refID="Map_A_Milepost_MilepostDockpane_ShowButton" size="large" />
+          <!--<tool refID="Map_A_Milepost_MapAMilepostMaptool" size="large" />-->
         </group>
       </groups>
       <controls>
@@ -31,6 +32,9 @@
         <button id="Map_A_Milepost_MilepostDockpane_ShowButton" caption="Show Milepost Tools" className="MilepostDockpane_ShowButton" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonPurple16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonPurple32.png">
           <tooltip heading="Show Dockpane">Show Dockpane<disabledText /></tooltip>
         </button>
+        <tool id="Map_A_Milepost_MapAMilepostMaptool" caption="MapAMilepostMaptool" className="MapAMilepostMaptool" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonRed16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonRed32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Tooltip Heading">Tooltip text<disabledText /></tooltip>
+        </tool>
       </controls>
       <dockPanes>
         <dockPane id="Map_A_Milepost_MilepostDockpane" caption="Milepost Tools" className="MilepostDockpaneViewModel" dock="group" dockWith="esri_core_projectDockPane">

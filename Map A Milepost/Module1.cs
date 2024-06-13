@@ -28,7 +28,10 @@ namespace Map_A_Milepost
         /// Retrieve the singleton instance to this module here
         /// </summary>
         public static Module1 Current => _this ??= (Module1)FrameworkApplication.FindModule("Map_A_Milepost_Module");
-
+        /// <summary>
+        /// Link to Dockpane view model which allows to update properties of dockpane
+        /// </summary>
+        internal static MilepostDockpaneViewModel DockpaneVM { get; set; }
         #region Overrides
         /// <summary>
         /// Called by Framework when ArcGIS Pro is closing

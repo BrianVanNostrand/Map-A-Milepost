@@ -15,6 +15,7 @@
                 <ResourceDictionary Source="../Themes/ButtonTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <viewmodels:MapPointViewModel x:Key="MapPointVM"/>
+            <viewmodels:MainViewModel x:Key="MainVM"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid DataContext="{StaticResource MapPointVM}" Background="White">
@@ -94,7 +95,7 @@
                 <ColumnDefinition Width="100px"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="MapPointExecuteButton" Style="{StaticResource whiteButton}" Grid.Row="1" Grid.Column="0" Command="{Binding UpdateSOEResponse}" ToolTip="Start mapping session.">Map It</Button>
+            <Button x:Name="MapPointExecuteButton" Style="{StaticResource whiteButton}" Grid.Row="1" Grid.Column="0" Command="{Binding InitializeMapToolSession}" CommandParameter="PointSelection" Content="{Binding MapButtonLabel}" ToolTip="Start mapping session."/>
             <Button x:Name="MapPointSaveButton" Grid.Row="1" Grid.Column="1" Command="{Binding SavePointResultCommand}" ToolTip="Save selection to the results tab.">
                 <Button.Style>
                     <Style BasedOn="{StaticResource whiteButton}" TargetType="{x:Type Button}">

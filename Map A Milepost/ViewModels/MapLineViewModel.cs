@@ -24,8 +24,8 @@ namespace Map_A_Milepost.ViewModels
         {
             _soeStartResponse = new SOEResponseModel();
             _soeEndResponse = new SOEResponseModel();
-            _soeStartArgs = new SOEArgsModel(1);
-            _soeEndArgs = new SOEArgsModel(2);
+            _soeStartArgs = new SOEArgsModel();
+            _soeEndArgs = new SOEArgsModel();
             _soeLineResponses = new List<List<SOEResponseModel>>();
         }
         public List<List<SOEResponseModel>> SoeLineResponses
@@ -85,7 +85,7 @@ namespace Map_A_Milepost.ViewModels
         {
             if (param.ToString() == "start")
             {
-                SOEResponseModel response = await Utils.HTTPRequest.QuerySOE(SOEStartArgs);
+                Dictionary<string,object> response = await Utils.HTTPRequest.QuerySOE(SOEStartArgs);
                 if (response != null)
                 {
                     if (Utils.CheckObject.HasBeenUpdated(SOEEndResponse))
@@ -112,7 +112,7 @@ namespace Map_A_Milepost.ViewModels
             }
             else if (param.ToString() == "end")
             {
-                SOEResponseModel response = await Utils.HTTPRequest.QuerySOE(SOEEndArgs);
+                Dictionary<string,object> response = await Utils.HTTPRequest.QuerySOE(SOEEndArgs);
                 if (response != null)
                 {
                     if (Utils.CheckObject.HasBeenUpdated(SOEStartResponse))

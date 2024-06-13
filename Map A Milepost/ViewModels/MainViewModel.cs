@@ -1,4 +1,8 @@
-﻿using Map_A_Milepost.Commands;
+﻿using ArcGIS.Core.Data;
+using ArcGIS.Desktop.Framework;
+using ArcGIS.Desktop.Framework.Threading.Tasks;
+using ArcGIS.Desktop.Mapping;
+using Map_A_Milepost.Commands;
 using Map_A_Milepost.Utils;
 using System;
 using System.Collections.Generic;
@@ -14,8 +18,7 @@ namespace Map_A_Milepost.ViewModels
 {
     class MainViewModel: ViewModelBase
     {
-        public ICommand SelectPageCommand => new RelayCommand(SelectPage);
-
+        public ICommand SelectPageCommand => new Commands.RelayCommand(SelectPage);
         private MapLineViewModel _mapLineViewModel;
         private MapPointViewModel _mapPointViewModel;
         private ResultsViewModel _resultsViewModel;
@@ -72,6 +75,7 @@ namespace Map_A_Milepost.ViewModels
             this.MapLineViewModel = new MapLineViewModel();
             this.ResultsViewModel = new ResultsViewModel();
             this.SelectedViewModel = this.MapPointViewModel;
+           
         }
         public void SelectPage(object param)
         {
@@ -92,9 +96,5 @@ namespace Map_A_Milepost.ViewModels
             }
             
         }
-
-        //public event PropertyChangedEventHandler PropertyChanged;
-        //protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        //  => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
