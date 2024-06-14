@@ -15,6 +15,15 @@ namespace Map_A_Milepost.Utils
 {
     class HTTPRequest
     {
+        /// <summary>
+        /// -   Uses Flurl to execute an HTTP Get request, with URL parameters generated using the SOE arguments passed from the MapPointViewModel and MapLineViewModel.
+        /// -   Deserializes the HTTP response to an array of SOEResponseModels and parses that array to return the appropriate value, depending on if this method
+        ///     was invoked by Map A Point or Map A Line.
+        /// -   The initial deserialization to an array is performed because the SOE Always returns an array, even if only one response is found. This array is ordered 
+        ///     based on proximity to the geometry of the argument passed in via URL params, so the first response in the array is used.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static async Task<Dictionary<string,object>> QuerySOE(SOEArgsModel args)
         {
             var url = new Flurl.Url("https://data.wsdot.wa.gov/arcgis/rest/services/Shared/ElcRestSOE/MapServer/exts/ElcRestSoe/Find%20Nearest%20Route%20Locations");

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Map_A_Milepost.Models
 {
+    /// <summary>
+    /// -   SOE Arguments passed to the SOE HTTP get request
+    /// </summary>
     public class SOEArgsModel:ObservableObject
     {
 		private string? _referenceDate;

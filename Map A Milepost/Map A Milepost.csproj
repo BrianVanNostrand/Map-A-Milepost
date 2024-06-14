@@ -6,6 +6,7 @@
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <NoWarn>CA1416</NoWarn>
+    <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Config.daml" />    
@@ -19,6 +20,7 @@
     <None Include="Module1.cs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Esri.ArcGISPro.Extensions" Version="2.9.0.32739" />
     <PackageReference Include="Flurl" Version="4.0.0" />
     <PackageReference Include="Flurl.Http" Version="4.0.2" />
     <PackageReference Include="Flurl.Http.Newtonsoft" Version="0.9.1" />

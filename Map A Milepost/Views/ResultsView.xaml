@@ -150,10 +150,10 @@
             <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource whiteButton}">
                 Export Data
             </Button>
-            <Button Grid.Row="2" Grid.Column="1" Command="{Binding DeleteItemsCommand}" Style="{StaticResource whiteButton}">
+            <Button x:Name="DeleteItemsButton" Grid.Row="2" Grid.Column="1" Command="{Binding DeleteItemsCommand}" Style="{StaticResource whiteButton}">
                 Delete Record
             </Button>
-            <Button Grid.Row="2" Grid.Column="2"  Command="{Binding ClearItemsCommand}" Style="{StaticResource whiteButton}">
+            <Button x:Name="ClearItemsButton" Grid.Row="2" Grid.Column="2"  Command="{Binding ClearItemsCommand}" Style="{StaticResource whiteButton}">
                 Clear
             </Button>
         </Grid>

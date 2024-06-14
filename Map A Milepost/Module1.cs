@@ -20,6 +20,10 @@ using System.Windows.Input;
 
 namespace Map_A_Milepost
 {
+
+    /// <summary>
+    /// Default ESRI class and methods.
+    /// </summary>
     internal class Module1 : Module
     {
         private static Module1 _this = null;

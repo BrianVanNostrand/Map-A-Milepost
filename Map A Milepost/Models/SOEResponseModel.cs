@@ -9,7 +9,10 @@ using Map_A_Milepost.Utils;
 
 namespace Map_A_Milepost.Models
 {
-
+    /// <summary>
+    /// -   SOE Response properties that are deserialized from the HTTP response, and 
+    ///     used by the viewmodels.
+    /// </summary>
     public class SOEResponseModel : ObservableObject
     {
 

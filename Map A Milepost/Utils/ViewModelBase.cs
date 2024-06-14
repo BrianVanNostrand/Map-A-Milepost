@@ -10,6 +10,9 @@ using System.Windows.Data;
 
 namespace Map_A_Milepost.Utils
 {
+    /// <summary>
+    /// -   Grants INotifyPropertyChanged to each viewmodel property. Performs the same function as ObservableObject, but with a different class name.
+    /// </summary>
     public class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

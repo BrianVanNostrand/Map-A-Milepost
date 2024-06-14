@@ -10,7 +10,8 @@ namespace Map_A_Milepost.Utils
     public static class CopyProps
     {
         /// <summary>
-        /// Extension for 'Object' that copies the properties to a destination object.
+        /// -   Used to copy the properties of the SOEResponse object returned from the SOE response to the static SOEResponse
+        ///     instance in the viewmodel.
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="destination">The destination.</param>
